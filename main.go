@@ -17,8 +17,8 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 			s.AddElement(svg.NewRandomSquare(i, j))
 		}
 	}
-	io.WriteString(w, s.ToString())
 	w.Header().Set("Content-Type", "image/svg+xml")
+	io.WriteString(w, s.ToString())
 }
 
 func main() {

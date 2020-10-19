@@ -18,9 +18,8 @@ func New() *SVG {
 }
 
 func (s *SVG) ToString() string {
-	inner := strings.Join(s.innerElements, "\n\t")
-	tags := []string{s.header, inner, closingTag()}
-	return strings.Join(tags, "\n")
+	inner := strings.Join(s.innerElements, "")
+	return strings.Join([]string{s.header, inner, closingTag()}, "")
 }
 
 func (s *SVG) AddElement(element string) {

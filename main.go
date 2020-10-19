@@ -1,4 +1,4 @@
-// server.go
+// main.go
 
 package server
 

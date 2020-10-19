@@ -1,0 +1,10 @@
+language: go
+python:
+  - "1.15"
+  - "1.12"
+
+install:
+  - go mod download
+
+script:
+  - go test ./...

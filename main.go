@@ -1,6 +1,6 @@
 // main.go
 
-package server
+package main
 
 import (
 	"io"

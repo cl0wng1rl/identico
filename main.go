@@ -9,7 +9,7 @@ import (
 )
 
 func welcome(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Welcome to Identico!")
+	io.WriteString(w, "<h1>Welcome to Identico!</h1>")
 }
 
 func main() {

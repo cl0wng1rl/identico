@@ -18,6 +18,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	io.WriteString(w, s.ToString())
+	w.Header().Set("Content-Type", "image/svg+xml")
 }
 
 func main() {

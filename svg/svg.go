@@ -43,5 +43,9 @@ func newRectElement(fillHex string, x int, y int, width int, height int) string 
 }
 
 func randomHexColor() string {
-	return fmt.Sprintf("#%x%x%x", rand.Intn(256), rand.Intn(256), rand.Intn(256))
+	return fmt.Sprintf("#%x%x%x", randomHexByte(), randomHexByte(), randomHexByte())
+}
+
+func randomHexByte() string {
+	return fmt.Sprintf("%02x", rand.Intn(256))
 }

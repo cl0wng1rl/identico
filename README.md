@@ -15,6 +15,6 @@
     <img src="https://img.shields.io/github/license/gabrielbarker/clyp" />
   </a>
 
-<i>A RESTful API for identicon svgs</i>
+<i>A RESTful API for identicon SVGs</i>
 
 </div>

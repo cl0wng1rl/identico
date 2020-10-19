@@ -8,10 +8,10 @@
   <a href="https://travis-ci.com/gabrielbarker/identico">
     <img src="https://travis-ci.com/gabrielbarker/identico.svg?branch=main"/>
   </a>
-  <a href="https://www.rust-lang.org/">
+  <a href="https://golang.org/">
     <img src="https://img.shields.io/badge/language-go-00ADD8"/>
   </a>
-  <a href="https://github.com/gabrielbarker/clyp/blob/main/LICENSE">
+  <a href="https://github.com/gabrielbarker/identico/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/gabrielbarker/clyp" />
   </a>
 

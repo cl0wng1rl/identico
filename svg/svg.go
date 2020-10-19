@@ -5,6 +5,7 @@ package svg
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 )
 
 type SVG struct {
@@ -17,11 +18,9 @@ func New() *SVG {
 }
 
 func (s *SVG) ToString() string {
-	inner := ""
-	for _, element := range s.innerElements {
-		inner += element
-	}
-	return fmt.Sprintf(`%v%v%v`, s.header, inner, closingTag())
+	inner := strings.Join(s.innerElements, "\n\t")
+	tags := []string{s.header, inner, closingTag()}
+	return strings.Join(tags, "\n")
 }
 
 func (s *SVG) AddElement(element string) {

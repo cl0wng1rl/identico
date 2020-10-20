@@ -35,10 +35,10 @@ func closingTag() string {
 }
 
 func NewRandomSquare(x int, y int) string {
-	return newRectElement(randomHexColor(), x, y, 1, 1)
+	return NewRectElement(randomHexColor(), x, y, 1, 1)
 }
 
-func newRectElement(fillHex string, x int, y int, width int, height int) string {
+func NewRectElement(fillHex string, x int, y int, width int, height int) string {
 	return fmt.Sprintf(`<rect fill="%v" x="%v" y="%v" width="%v" height="%v" />`, fillHex, x, y, width, height)
 }
 

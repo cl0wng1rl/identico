@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -12,7 +13,7 @@ import (
 )
 
 func welcome(w http.ResponseWriter, r *http.Request) {
-	currentTimeString := time.Now().Format("2006-01-02 15:04:05 Monday")
+	currentTimeString := fmt.Sprintf("%v", time.Now().UnixNano())
 	id := identicon.SimpleIdenticon{}
 	s := id.Create(currentTimeString)
 	w.Header().Set("Content-Type", "image/svg+xml")

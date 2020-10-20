@@ -17,6 +17,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 	id := identicon.SimpleIdenticon{}
 	s := id.Create(currentTimeString)
 	w.Header().Set("Content-Type", "image/svg+xml")
+	w.Header().Set("Cache-Control", "no-store")
 	io.WriteString(w, s.ToString())
 }
 

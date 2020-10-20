@@ -47,11 +47,20 @@ const (
 )
 
 func (id *SimpleIdenticon) generateData(input string) simpleIdenticonData {
-	firstColor := colorful.Hsv(3.6*float64((len(input)*31)%100), 1, 1).Hex()
-	secondColor := colorful.Hsv(3.6*float64((len(input)*13)%100), 1, 1).Hex()
+	key := getInputKey(input)
+	firstColor := colorful.Hsv(3.6*float64((key*31)%100), 1, 1).Hex()
+	secondColor := colorful.Hsv(3.6*float64((key*13)%100), 1, 1).Hex()
 	pixels := [64]pixelColor{}
 	copy(pixels[:], getPixelColors(input, 64)[:64])
 	return simpleIdenticonData{firstColor: firstColor, secondColor: secondColor, pixels: pixels}
+}
+
+func getInputKey(input string) int {
+	key := 0
+	for _, char := range input {
+		key += int(char)
+	}
+	return key % 100
 }
 
 func getColorForPixelColor(pixelIndex int, data simpleIdenticonData) string {

@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <title>identico</title>
+  </head>
+  <body>
+    <section class="container">
+      <div align="center">
+        <h1>identico</h1>
+        <img src="https://identico.herokuapp.com/" width="400" height="400" id="identicon" />
+      </div>
+      <div class="row">
+        <div class="column column-50 column-offset-20">
+          <label for="message">Name</label>
+          <input type="text" placeholder="Enter your message..." id="message" />
+        </div>
+        <div class="column column-10">
+          <label for="complexity">Complexity</label>
+          <select id="complexity">
+            <option value="2">4</option>
+            <option value="3">6</option>
+            <option value="4">8</option>
+            <option value="6">12</option>
+            <option value="8" selected="selected">16</option>
+            <option value="10">20</option>
+            <option value="12">24</option>
+            <option value="16">32</option>
+            <option value="32">64</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column column-60 column-offset-20">
+          <label for="url" align="center">URL</label>
+          <input type="text" placeholder="https://identico.herokuapp.com/" id="url" />
+        </div>
+      </div>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>

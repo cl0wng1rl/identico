@@ -13,8 +13,7 @@ type Identicon interface {
 
 type SimpleIdenticon struct{}
 
-func (id *SimpleIdenticon) Create(input string) svg.SVG {
-	quadrantWidth := 8
+func (id *SimpleIdenticon) Create(input string, quadrantWidth int) svg.SVG {
 	data := id.generateData(input, quadrantWidth)
 	maxIndex := 2*quadrantWidth - 1
 	s := svg.New(quadrantWidth * 2)

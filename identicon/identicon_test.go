@@ -4,7 +4,7 @@ import "testing"
 
 func TestSimpleIdenticonCreate(t *testing.T) {
 	id := SimpleIdenticon{}
-	svgElement := id.Create("test input")
+	svgElement := id.Create("test input", 8)
 	if svgElement.ToString() != expectedSVG {
 		t.Errorf("created svg should be: %v , instead got: %v", expectedSVG, svgElement.ToString())
 	}

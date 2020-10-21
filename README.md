@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://identico.herokuapp.com/">
-    <img src="https://identico.herokuapp.com/" width="250" height="200">
+    <img src="https://identico.herokuapp.com/1" width="250" height="200">
   </a>
 
   <h1>identico</h1>

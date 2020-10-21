@@ -14,19 +14,17 @@ type Identicon interface {
 type SimpleIdenticon struct{}
 
 func (id *SimpleIdenticon) Create(input string) svg.SVG {
-	data := id.generateData(input)
-	s := svg.New()
-	for j := 0; j < 8; j++ {
-		for i := 0; i < 8; i++ {
-			color := getColorForPixelColor(8*j+i, data)
-			element := svg.NewRectElement(color, i, j, 1, 1)
-			s.AddElement(element)
-			element = svg.NewRectElement(color, 15-i, j, 1, 1)
-			s.AddElement(element)
-			element = svg.NewRectElement(color, i, 15-j, 1, 1)
-			s.AddElement(element)
-			element = svg.NewRectElement(color, 15-i, 15-j, 1, 1)
-			s.AddElement(element)
+	quadrantWidth := 8
+	data := id.generateData(input, quadrantWidth)
+	maxIndex := 2*quadrantWidth - 1
+	s := svg.New(quadrantWidth * 2)
+	for j := 0; j < quadrantWidth; j++ {
+		for i := 0; i < quadrantWidth; i++ {
+			color := getColorForPixelColor(quadrantWidth*j+i, data)
+			s.AddNewRectElement(color, i, j)
+			s.AddNewRectElement(color, maxIndex-i, j)
+			s.AddNewRectElement(color, i, maxIndex-j)
+			s.AddNewRectElement(color, maxIndex-i, maxIndex-j)
 		}
 	}
 	return *s
@@ -35,7 +33,7 @@ func (id *SimpleIdenticon) Create(input string) svg.SVG {
 type simpleIdenticonData struct {
 	firstColor  string
 	secondColor string
-	pixels      [64]pixelColor
+	pixels      []pixelColor
 }
 
 type pixelColor int
@@ -46,12 +44,11 @@ const (
 	SECOND
 )
 
-func (id *SimpleIdenticon) generateData(input string) simpleIdenticonData {
+func (id *SimpleIdenticon) generateData(input string, quadrantWidth int) simpleIdenticonData {
 	key := getInputKey(input)
 	firstColor := colorful.Hsv(3.6*float64((key*31)%100), 1, 1).Hex()
 	secondColor := colorful.Hsv(3.6*float64((key*13)%100), 1, 1).Hex()
-	pixels := [64]pixelColor{}
-	copy(pixels[:], getPixelColors(input, 64)[:64])
+	pixels := getPixelColors(input, quadrantWidth*quadrantWidth)
 	return simpleIdenticonData{firstColor: firstColor, secondColor: secondColor, pixels: pixels}
 }
 

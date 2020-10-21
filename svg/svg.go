@@ -13,8 +13,8 @@ type SVG struct {
 	innerElements []string
 }
 
-func New() *SVG {
-	return &SVG{header: defaultHeader(), innerElements: []string{}}
+func New(width int) *SVG {
+	return &SVG{header: defaultHeader(width), innerElements: []string{}}
 }
 
 func (s *SVG) ToString() string {
@@ -26,8 +26,12 @@ func (s *SVG) AddElement(element string) {
 	s.innerElements = append(s.innerElements, element)
 }
 
-func defaultHeader() string {
-	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 16" shape-rendering="crispEdges">`
+func (s *SVG) AddNewRectElement(fillHex string, x int, y int) {
+	s.innerElements = append(s.innerElements, newRectElement(fillHex, x, y, 1, 1))
+}
+
+func defaultHeader(width int) string {
+	return fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %v %v" shape-rendering="crispEdges">`, width, width)
 }
 
 func closingTag() string {
@@ -35,10 +39,10 @@ func closingTag() string {
 }
 
 func NewRandomSquare(x int, y int) string {
-	return NewRectElement(randomHexColor(), x, y, 1, 1)
+	return newRectElement(randomHexColor(), x, y, 1, 1)
 }
 
-func NewRectElement(fillHex string, x int, y int, width int, height int) string {
+func newRectElement(fillHex string, x int, y int, width int, height int) string {
 	return fmt.Sprintf(`<rect fill="%v" x="%v" y="%v" width="%v" height="%v" />`, fillHex, x, y, width, height)
 }
 

@@ -7,6 +7,8 @@ import (
 	"golang.org/x/crypto/sha3"
 )
 
+const decimal_hex_limit int = 15
+
 func Hash(input string, length int) string {
 	msg := []byte(input)
 	out := make([]byte, length)
@@ -19,9 +21,9 @@ func Hash(input string, length int) string {
 func ConvertHashToBase(hash string, base int) string {
 	baseHash := ""
 	index := 0
-	for len(hash[index:]) >= 16 {
-		baseHash += hashBase(hash[index:index+16], base)
-		index += 16
+	for len(hash[index:]) >= decimal_hex_limit {
+		baseHash += hashBase(hash[index:index+decimal_hex_limit], base)
+		index += decimal_hex_limit
 	}
 	baseHash += hashBase(hash[index:], base)
 	return baseHash

@@ -2,7 +2,6 @@ package identicon
 
 import (
 	"strconv"
-	"strings"
 
 	"github.com/gabrielbarker/identico/hash"
 	"github.com/gabrielbarker/identico/svg"
@@ -62,14 +61,6 @@ func convert2BitHexTo360Value(hexNum string) float64 {
 	return float64(360 * val / 256)
 }
 
-func getInputKey(input string) int {
-	key := 0
-	for _, char := range input {
-		key += int(char)
-	}
-	return key % 100
-}
-
 func getColorForPixelColor(pixelIndex int, data QuadrantIdenticonData) string {
 	if data.pixels[pixelIndex] == FIRST {
 		return data.firstColor
@@ -78,14 +69,4 @@ func getColorForPixelColor(pixelIndex int, data QuadrantIdenticonData) string {
 	} else {
 		return "#00000000"
 	}
-}
-
-func getPixelColors(input string, length int) []pixelColor {
-	messageToRepeat := "message to encode"
-	toEncode := strings.Repeat(messageToRepeat, 1+(length/len(messageToRepeat)))
-	pixels := []pixelColor{}
-	for i := 0; i < length; i++ {
-		pixels = append(pixels, pixelColor((int(input[i%len(input)])+int(toEncode[i])+i)%3))
-	}
-	return pixels
 }

@@ -2,8 +2,8 @@ package identicon
 
 import "testing"
 
-func TestSimpleIdenticonCreate(t *testing.T) {
-	id := SimpleIdenticon{}
+func TestQuadrantIdenticonCreate(t *testing.T) {
+	id := QuadrantIdenticon{}
 	svgElement := id.Create("test input", 8)
 	if svgElement.ToString() != expectedSVG {
 		t.Errorf("created svg should be: %v , instead got: %v", expectedSVG, svgElement.ToString())

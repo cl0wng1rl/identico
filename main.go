@@ -18,7 +18,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 	message := getMessageParameter(r)
 	quadrantSize := getQuadrantSizeParameter(r)
 
-	id := identicon.SimpleIdenticon{}
+	id := identicon.QuadrantIdenticon{}
 	s := id.Create(message, quadrantSize)
 	w.Header().Set("Content-Type", "image/svg+xml")
 	w.Header().Set("Cache-Control", "no-store")

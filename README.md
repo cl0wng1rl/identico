@@ -1,6 +1,6 @@
 <div align="center">
-  <a href="https://identico.herokuapp.com/">
-    <img src="https://identico.herokuapp.com/" width="250" height="200">
+  <a href="https://gabrielbarker.github.io/identico/">
+    <img src="https://identico.herokuapp.com/?quadrant=8" width="200" height="200">
   </a>
 
   <h1>identico</h1>

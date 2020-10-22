@@ -40,6 +40,9 @@ func getQuadrantSizeParameter(r *http.Request) int {
 	if err != nil {
 		log.Fatal(err)
 	}
+	if size > 128 {
+		size = 128
+	}
 	return size
 }
 

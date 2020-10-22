@@ -1,8 +1,10 @@
 package identicon
 
 import (
+	"strconv"
 	"strings"
 
+	"github.com/gabrielbarker/identico/hash"
 	"github.com/gabrielbarker/identico/svg"
 	"github.com/lucasb-eyer/go-colorful"
 )
@@ -43,12 +45,25 @@ const (
 	SECOND
 )
 
+func convertIntsToPixelColors(vals string) []pixelColor {
+	pixelColors := make([]pixelColor, len(vals))
+	for i, v := range vals {
+		pixelColors[i] = pixelColor(v - '0')
+	}
+	return pixelColors
+}
+
 func (id *SimpleIdenticon) generateData(input string, quadrantWidth int) simpleIdenticonData {
-	key := getInputKey(input)
-	firstColor := colorful.Hsv(3.6*float64((key*31)%100), 1, 1).Hex()
-	secondColor := colorful.Hsv(3.6*float64((key*13)%100), 1, 1).Hex()
-	pixels := getPixelColors(input, quadrantWidth*quadrantWidth)
+	hashString := hash.Hash(input, quadrantWidth*quadrantWidth+4)
+	firstColor := colorful.Hsv(convert2BitHexTo360Value(hashString[:2]), 1, 1).Hex()
+	secondColor := colorful.Hsv(convert2BitHexTo360Value(hashString[2:4]), 1, 1).Hex()
+	pixels := convertIntsToPixelColors(hash.ConvertHashToBase(hashString[4:], 3))
 	return simpleIdenticonData{firstColor: firstColor, secondColor: secondColor, pixels: pixels}
+}
+
+func convert2BitHexTo360Value(hexNum string) float64 {
+	val, _ := strconv.ParseInt(hexNum, 16, 16)
+	return float64(360 * val / 256)
 }
 
 func getInputKey(input string) int {

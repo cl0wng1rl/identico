@@ -15,24 +15,34 @@ import (
 )
 
 func welcome(w http.ResponseWriter, r *http.Request) {
-	message := getMessageParameter(r)
+	message := getMessageParameter(w, r)
 	quadrantSize := getQuadrantSizeParameter(r)
 
 	id := identicon.QuadrantIdenticon{}
 	s := id.Create(message, quadrantSize)
 	w.Header().Set("Content-Type", "image/svg+xml")
-	w.Header().Set("Cache-Control", "no-store")
+	if message != "" {
+
+	}
 	io.WriteString(w, s.ToString())
 }
 
 func main() {
 	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
 	http.HandleFunc("/", welcome)
 	http.ListenAndServe(":"+port, nil)
 }
 
-func getMessageParameter(r *http.Request) string {
-	return getURLParameter("message", fmt.Sprintf("%v", time.Now().UnixNano()), r)
+func getMessageParameter(w http.ResponseWriter, r *http.Request) string {
+	message := getURLParameter("message", "", r)
+	if message == "" {
+		w.Header().Set("Cache-Control", "no-store")
+		return fmt.Sprintf("%v", time.Now().UnixNano())
+	}
+	return message
 }
 
 func getQuadrantSizeParameter(r *http.Request) int {
